@@ -1,0 +1,76 @@
+{
+  "months": [
+    {
+      "M_NUM": 1,
+      "M_FULL_NAME": "ජනවාරි",
+      "M_SHORT_NAME": "ජන",
+      "M_SINHALA_NAME": "දුරුතු"
+    },
+    {
+      "M_NUM": 2,
+      "M_FULL_NAME": "පෙබරවාරි",
+      "M_SHORT_NAME": "පෙබ",
+      "M_SINHALA_NAME": "නවම්"
+    },
+    {
+      "M_NUM": 3,
+      "M_FULL_NAME": "මාර්තු",
+      "M_SHORT_NAME": "මාර්",
+      "M_SINHALA_NAME": "මැදින්"
+    },
+    {
+      "M_NUM": 4,
+      "M_FULL_NAME": "අප්‍රේල්",
+      "M_SHORT_NAME": "අප්‍රේල්",
+      "M_SINHALA_NAME": "බක්"
+    },
+    {
+      "M_NUM": 5,
+      "M_FULL_NAME": "මැයි",
+      "M_SHORT_NAME": "මැයි",
+      "M_SINHALA_NAME": "වෙසක්"
+    },
+    {
+      "M_NUM": 6,
+      "M_FULL_NAME": "ජූනි",
+      "M_SHORT_NAME": "ජූනි",
+      "M_SINHALA_NAME": "පොසොන්"
+    },
+    {
+      "M_NUM": 7,
+      "M_FULL_NAME": "ජූලි",
+      "M_SHORT_NAME": "ජූලි",
+      "M_SINHALA_NAME": "ඇසළ"
+    },
+    {
+      "M_NUM": 8,
+      "M_FULL_NAME": "අගෝස්තු",
+      "M_SHORT_NAME": "අගෝ",
+      "M_SINHALA_NAME": "නිකිණි"
+    },
+    {
+      "M_NUM": 9,
+      "M_FULL_NAME": "සැප්තැම්බර්",
+      "M_SHORT_NAME": "සැප්",
+      "M_SINHALA_NAME": "බිනර"
+    },
+    {
+      "M_NUM": 10,
+      "M_FULL_NAME": "ඔක්තෝබර්",
+      "M_SHORT_NAME": "ඔක්",
+      "M_SINHALA_NAME": "වප්"
+    },
+    {
+      "M_NUM": 11,
+      "M_FULL_NAME": "නොවැම්බර්",
+      "M_SHORT_NAME": "නොවැ",
+      "M_SINHALA_NAME": "ඉල්"
+    },
+    {
+      "M_NUM": 12,
+      "M_FULL_NAME": "දෙසැම්බර්",
+      "M_SHORT_NAME": "දෙසැ",
+      "M_SINHALA_NAME": "උඳුවප්"
+    }
+  ]
+}
