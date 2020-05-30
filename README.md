@@ -1,8 +1,7 @@
 # Date-to-Sinhala
 Convert Date string to Sinhala Date
 
-
-###function parameters
+### function parameters
 
 get_date($date_time, $get = "ALL", $month_type = "NUM", $day_type = "NUM", $date_join = "-", $order = "Y-M-D")
 
@@ -32,7 +31,7 @@ get_date($date_time, $get = "ALL", $month_type = "NUM", $day_type = "NUM", $date
     * Y-M-D, Y-D-M, Y-D , M-D...
       
       
-###Examples
+### Examples
 ```sh
 $date_to_convert = "2020-05-16";
 ```
