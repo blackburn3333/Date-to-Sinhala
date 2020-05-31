@@ -131,26 +131,35 @@ class Sinhaladate
         $view_month = "";
         foreach ($this->days as $day) {
             if ($day['D_NUM'] == $g_day) {
-                if ($day_type == "S") {
-                    $view_day = $day['D_SHORT_NAME'];
-                } elseif ($day_type == "F") {
-                    $view_day = $day['D_FULL_NAME'];
-                } else {
-                    $view_day = $g_day;
+                switch ($day_type) {
+                    case 'S':
+                        $view_day = $day['D_SHORT_NAME'];
+                        break;
+                    case 'F':
+                        $view_day = $day['D_FULL_NAME'];
+                        break;
+                    default:
+                        $view_day = $g_day;
+                        break;
                 }
             }
         }
 
         foreach ($this->months as $month) {
             if ($month['M_NUM'] == $g_month) {
-                if ($month_type == "S") {
-                    $view_month = $month['M_SHORT_NAME'];
-                } elseif ($month_type == "SIN") {
-                    $view_month = $month['M_SINHALA_NAME'];
-                } elseif ($month_type == "F") {
-                    $view_month = $month['M_FULL_NAME'];
-                } else {
-                    $view_month = $g_month;
+                switch ($month_type) {
+                    case 'S':
+                        $view_month = $month['M_SHORT_NAME'];
+                        break;
+                    case 'SIN':
+                        $view_month = $month['M_SINHALA_NAME'];
+                        break;
+                    case 'F':
+                        $view_month = $month['M_FULL_NAME'];
+                        break;
+                    default:
+                        $view_month = $g_month;
+                        break;
                 }
             }
         }
@@ -163,12 +172,18 @@ class Sinhaladate
             $order_explode = explode("-", $order);
             $order_set = array();
             for ($x = 0; $x < count($order_explode); $x++) {
-                if ($order_explode[$x] == "M") {
-                    array_push($order_set, $view_month);
-                } elseif ($order_explode[$x] == "D") {
-                    array_push($order_set, $view_day);
-                } elseif ($order_explode[$x] == "Y") {
-                    array_push($order_set, $g_year);
+                switch ($order_explode[$x]) {
+                    case 'M':
+                        array_push($order_set, $view_month);
+                        break;
+                    case 'D':
+                        array_push($order_set, $view_day);
+                        break;
+                    case 'Y':
+                        array_push($order_set, $g_year);
+                        break;
+                    default:
+                        break;
                 }
             }
             return join($date_join, $order_set);
