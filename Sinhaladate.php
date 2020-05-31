@@ -164,29 +164,33 @@ class Sinhaladate
             }
         }
 
-        if ($get == "D") {
-            return $view_day;
-        } elseif ($get == "M") {
-            return $view_month;
-        } else {
-            $order_explode = explode("-", $order);
-            $order_set = array();
-            for ($x = 0; $x < count($order_explode); $x++) {
-                switch ($order_explode[$x]) {
-                    case 'M':
-                        array_push($order_set, $view_month);
-                        break;
-                    case 'D':
-                        array_push($order_set, $view_day);
-                        break;
-                    case 'Y':
-                        array_push($order_set, $g_year);
-                        break;
-                    default:
-                        break;
+        switch ($get) {
+            case 'D':
+                return $view_day;
+                break;
+            case 'M':
+                return $view_month;
+                break;
+            default:
+                $order_explode = explode("-", $order);
+                $order_set = array();
+                for ($x = 0; $x < count($order_explode); $x++) {
+                    switch ($order_explode[$x]) {
+                        case 'M':
+                            array_push($order_set, $view_month);
+                            break;
+                        case 'D':
+                            array_push($order_set, $view_day);
+                            break;
+                        case 'Y':
+                            array_push($order_set, $g_year);
+                            break;
+                        default:
+                            break;
+                    }
                 }
-            }
-            return join($date_join, $order_set);
+                return join($date_join, $order_set);
+                break;
         }
     }
 }
