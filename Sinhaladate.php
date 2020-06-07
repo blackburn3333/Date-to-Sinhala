@@ -145,6 +145,9 @@ class Sinhaladate
                     case 'F':
                         $view_day = $day['D_FULL_NAME'];
                         break;
+                    case 'SIN':
+                        $view_day = $day['D_SINHALA_NAME'];
+                        break;
                     default:
                         $view_day = $g_day;
                         break;

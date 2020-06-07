@@ -23,6 +23,7 @@ get_date($date_time, $get = "ALL", $month_type = "NUM", $day_type = "NUM", $date
     * "NUM" -> return day as number,
     * "F" -> return full Sinhala name of day (සඳුදා, අඟහරුවාදා...)
     * "S" -> return short Sinhala name of day (අඟහ, බ්‍රහස්, සිකු...)
+    * "SIN" -> return short Sinhala name of day (රිවිදා, කිවිදා, බුධදා...)
     
 * $date_join -> glue symbol of date
     * example $ -> 2020$වෙසක්$සෙන
@@ -38,7 +39,7 @@ $date_to_convert = "2020-05-16";
 ### 01
 
 ```sh
-$date_data = $date_to_sin->get_date_time($date_to_convert, "ALL");
+$date_data = $date_to_sin->get_date($date_to_convert, "ALL");
 echo $date_data;
 ```
 ```
@@ -48,7 +49,7 @@ Output -> 2020-05-6
 ### 02
 
 ```sh
-$date_data = $date_to_sin->get_date_time($date_to_convert, "M");
+$date_data = $date_to_sin->get_date($date_to_convert, "M");
 echo $date_data;
 ```
 ```
@@ -58,7 +59,7 @@ Output -> 05
 ### 03
 
 ```sh
-$date_data = $date_to_sin->get_date_time($date_to_convert, "M","SIN");
+$date_data = $date_to_sin->get_date($date_to_convert, "M","SIN");
 echo $date_data;
 ```
 ```
@@ -68,7 +69,7 @@ Output -> වෙසක්
 ### 04
 
 ```sh
-$date_data = $date_to_sin->get_date_time($date_to_convert, "D","","F");
+$date_data = $date_to_sin->get_date($date_to_convert, "D","","F");
 echo $date_data;
 ```
 ```
@@ -79,17 +80,28 @@ Output -> සෙනසුරාදා
 ### 05
 
 ```sh
-$date_data = $date_to_sin->get_date_time($date_to_convert, "D","","S");
+$date_data = $date_to_sin->get_date($date_to_convert, "D","","S");
 echo $date_data;
 ```
 ```
 Output -> සෙන
 ```
 
-### 06
+### 07
 
 ```sh
-$date_data = $date_to_sin->get_date_time($date_to_convert, "ALL","SIN","S");
+$date_data = $date_to_sin->get_date($date_to_convert, "D","","SIN");
+echo $date_data;
+```
+```
+Output -> ශනිදා
+```
+
+
+### 08
+
+```sh
+$date_data = $date_to_sin->get_date($date_to_convert, "ALL","SIN","S");
 echo $date_data;
 ```
 ```
@@ -97,20 +109,20 @@ Output -> 2020-වෙසක්-සෙන
 ```
 
 
-### 07
+### 09
 
 ```sh
-$date_data = $date_to_sin->get_date_time($date_to_convert, "ALL","SIN","S","/");
+$date_data = $date_to_sin->get_date($date_to_convert, "ALL","SIN","S","/");
 echo $date_data;
 ```
 ```
 Output -> 2020/වෙසක්/සෙන
 ```
 
-### 08
+### 10
 
 ```sh
-$date_data = $date_to_sin->get_date_time($date_to_convert, "ALL","SIN","S","/","D-M-Y");
+$date_data = $date_to_sin->get_date($date_to_convert, "ALL","SIN","S","/","D-M-Y");
 echo $date_data;
 ```
 ```
@@ -118,10 +130,10 @@ Output -> සෙන/වෙසක්/2020
 ```
 
 
-### 09
+### 11
 
 ```sh
-$date_data = $date_to_sin->get_date_time($date_to_convert, "ALL","SIN","S","/","M-D");
+$date_data = $date_to_sin->get_date($date_to_convert, "ALL","SIN","S","/","M-D");
 echo $date_data;
 ```
 ```
