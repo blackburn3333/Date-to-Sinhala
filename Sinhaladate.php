@@ -86,37 +86,44 @@ class Sinhaladate
         array(
             "D_NUM" => "1",
             "D_FULL_NAME" => "සඳුදා",
-            "D_SHORT_NAME" => "සඳුදා"
+            "D_SHORT_NAME" => "සඳුදා",
+            "D_SINHALA_NAME" => "සඳුදා"
         ),
         array(
             "D_NUM" => "2",
             "D_FULL_NAME" => "අඟහරුවාදා",
-            "D_SHORT_NAME" => "අඟහ"
+            "D_SHORT_NAME" => "අඟහ",
+            "D_SINHALA_NAME" => "කුජදා"
         ),
         array(
             "D_NUM" => "3",
             "D_FULL_NAME" => "බදාදා",
-            "D_SHORT_NAME" => "බදාදා"
+            "D_SHORT_NAME" => "බදාදා",
+            "D_SINHALA_NAME" => "බුධදා"
         ),
         array(
             "D_NUM" => "4",
             "D_FULL_NAME" => "බ්‍රහස්පතින්දා",
-            "D_SHORT_NAME" => "බ්‍රහස්"
+            "D_SHORT_NAME" => "බ්‍රහස්",
+            "D_SINHALA_NAME" => "ගුරුදා"
         ),
         array(
             "D_NUM" => "5",
             "D_FULL_NAME" => "සිකුරාදා",
-            "D_SHORT_NAME" => "සිකු"
+            "D_SHORT_NAME" => "සිකු",
+            "D_SINHALA_NAME" => "කිවිදා"
         ),
         array(
             "D_NUM" => "6",
             "D_FULL_NAME" => "සෙනසුරාදා",
-            "D_SHORT_NAME" => "සෙන"
+            "D_SHORT_NAME" => "සෙන",
+            "D_SINHALA_NAME" => "ශනිදා"
         ),
         array(
             "D_NUM" => "7",
             "D_FULL_NAME" => "ඉරිදා",
-            "D_SHORT_NAME" => "ඉරිදා"
+            "D_SHORT_NAME" => "ඉරිදා",
+            "D_SINHALA_NAME" => "රිවිදා"
         )
     );
 
