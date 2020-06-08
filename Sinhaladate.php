@@ -127,15 +127,19 @@ class Sinhaladate
         )
     );
 
-    public function get_date($date_time, $get = "ALL", $month_type = "NUM", $day_type = "NUM", $date_join = "-", $order = "Y-M-D")
+    public function get_date($date_time, $get = "ALL", $month_type = "NUM", $day_type = "NUM", $date_join = "-", $order = "Y-M-D", $time_type = null)
     {
+
 
         $g_year = date("Y", strtotime($date_time));
         $g_month = date("m", strtotime($date_time));
         $g_day = date('w', strtotime($date_time));
 
+
+
         $view_day = "";
         $view_month = "";
+
         foreach ($this->days as $day) {
             if ($day['D_NUM'] == $g_day) {
                 switch ($day_type) {
@@ -174,12 +178,38 @@ class Sinhaladate
             }
         }
 
+        $time_view = "";
+        $time_indi = " පෙව";
+
+        $time_24 = date('H:i:s', strtotime($date_time));
+        $time_12 = date('g:i', strtotime($date_time));
+        $time_12_indicator = date('a', strtotime($date_time));
+
+        if ($time_12_indicator == "pm") {
+            $time_indi = " පව";
+        }
+
+        switch ($time_type) {
+            case '12':
+                $time_view = $time_12 . $time_indi;
+                break;
+            case '24':
+                $time_view = $time_24;
+                break;
+            default:
+                $time_view = $time_12 . $time_indi;
+                break;
+        }
+
         switch ($get) {
             case 'D':
                 return $view_day;
                 break;
             case 'M':
                 return $view_month;
+                break;
+            case 'TIME':
+                return $time_view;
                 break;
             default:
                 $order_explode = explode("-", $order);
@@ -202,5 +232,7 @@ class Sinhaladate
                 return join($date_join, $order_set);
                 break;
         }
+
+
     }
 }

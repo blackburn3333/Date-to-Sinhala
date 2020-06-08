@@ -6,7 +6,7 @@ Convert Date string to Sinhala Date
 get_date($date_time, $get = "ALL", $month_type = "NUM", $day_type = "NUM", $date_join = "-", $order = "Y-M-D")
 
 * $date_time -> input date string
-    * example -> "2020-05-16"
+    * example -> "2020-05-17 13:15:00"
 
 * $get -> return value
     * "ALL" -> default value and return year, month and date
@@ -138,4 +138,14 @@ echo $date_data;
 ```
 ```
 Output -> වෙසක්/සෙන
+```
+
+### 12
+
+```sh
+$date_data = $date_to_sin->get_date($date_to_convert, "TIME", "", "","","","12");
+echo $date_data;
+```
+```
+Output -> 1:15 පව
 ```

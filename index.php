@@ -8,8 +8,8 @@
 include 'Sinhaladate.php';
 $date_to_sin = new Sinhaladate();
 
-$date_to_convert = "2020-05-16";
-$date_data = $date_to_sin->get_date($date_to_convert, "D","","SIN");
+$date_to_convert = "2020-05-17 13:15:00";
+$date_data = $date_to_sin->get_date($date_to_convert, "TIME", "", "","","","12");
 
 echo $date_data;
 ?>
