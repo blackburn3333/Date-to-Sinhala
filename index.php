@@ -8,8 +8,25 @@
 include 'Sinhaladate.php';
 $date_to_sin = new Sinhaladate();
 
-$date_to_convert = "2020-05-17 13:15:00";
-$date_data = $date_to_sin->get_date($date_to_convert, "TIME", "", "","","","12");
+/*$date_object = array(
+    "date_time" => "2020-06-17 13:15:00",
+    "want" => "time",
+    "want_m_type" => "num",
+    "want_d_type" => "s",
+    "want_t_type" => "f",
+    "date_join_type" => "-",
+    "format" => "y-m-d",
+    "time_format" => "12"
+);
+*/
+
+$date_object = array(
+    "date_time" => "2020-06-17 13:15:00",
+    "want" => "time",
+    "time_format" => "24"
+);
+
+$date_data = $date_to_sin->get_date($date_object);
 
 echo $date_data;
 ?>

@@ -81,7 +81,6 @@ class Sinhaladate
             "M_SINHALA_NAME" => "උඳුවප්"
         )
     );
-
     private $days = array(
         array(
             "D_NUM" => "1",
@@ -127,48 +126,133 @@ class Sinhaladate
         )
     );
 
-    public function get_date($date_time, $get = "ALL", $month_type = "NUM", $day_type = "NUM", $date_join = "-", $order = "Y-M-D", $time_type = null)
+    public function get_date($date_time_data)
     {
+        if (isset($date_time_data['date_time'])) {
+            $date_time = $date_time_data['date_time'];
+            if ($date_time) {
+                return $this->generate_date($date_time_data);
+            } else {
+                return "Enter date time string to convert";
+            }
+        } else {
+            return "date_time index not found!";
+        }
+    }
+
+    private function generate_date($date_time_data)
+    {
+        $want_type = "all";
+        $date_format = "y-m-d";
+        $m_type = "f";
+        $d_type = "f";
+        $t_type = "f";
+        $join_string = "-";
+        $time_format = "12";
 
 
-        $g_year = date("Y", strtotime($date_time));
-        $g_month = date("m", strtotime($date_time));
-        $g_day = date('w', strtotime($date_time));
-
-
-
-        $view_day = "";
-        $view_month = "";
-
-        foreach ($this->days as $day) {
-            if ($day['D_NUM'] == $g_day) {
-                switch ($day_type) {
-                    case 'S':
-                        $view_day = $day['D_SHORT_NAME'];
-                        break;
-                    case 'F':
-                        $view_day = $day['D_FULL_NAME'];
-                        break;
-                    case 'SIN':
-                        $view_day = $day['D_SINHALA_NAME'];
-                        break;
-                    default:
-                        $view_day = $g_day;
-                        break;
-                }
+        if (isset($date_time_data['want'])) {
+            $w_type = $date_time_data['want'];
+            if ($w_type) {
+                $want_type = $w_type;
             }
         }
 
+        if (isset($date_time_data['want_m_type'])) {
+            $w_m_type = $date_time_data['want_m_type'];
+            if ($w_m_type) {
+                $m_type = $w_m_type;
+            }
+        }
+
+        if (isset($date_time_data['want_d_type'])) {
+            $w_d_type = $date_time_data['want_d_type'];
+            if ($w_d_type) {
+                $d_type = $w_d_type;
+            }
+        }
+
+        if (isset($date_time_data['want_t_type'])) {
+            $w_t_type = $date_time_data['want_t_type'];
+            if ($w_t_type) {
+                $t_type = $w_t_type;
+            }
+        }
+
+        if (isset($date_time_data['date_join_type'])) {
+            $j_type = $date_time_data['date_join_type'];
+            if ($j_type) {
+                $join_string = $j_type;
+            }
+        }
+
+        if (isset($date_time_data['format'])) {
+            $format = $date_time_data['format'];
+            if ($format) {
+                $date_format = $format;
+            }
+        }
+
+        if (isset($date_time_data['time_format'])) {
+            $t_format = $date_time_data['time_format'];
+            if ($t_format) {
+                $time_format = $t_format;
+            }
+        }
+
+        $date_time = $date_time_data['date_time'];
+        return $this->setup_date($date_time, $want_type, $d_type, $m_type, $t_type, $date_format, $time_format, $join_string);
+    }
+
+    private function setup_date($date_time, $want, $d_want_type, $m_want_type, $t_want_type, $format, $time_format, $join_string)
+    {
+        $g_year = date("Y", strtotime($date_time));
+        $g_month = date("m", strtotime($date_time));
+        $g_day = date('w', strtotime($date_time));
+        $g_d_m = date('d', strtotime($date_time));
+
+
+        $month = $this->format_month($g_month, $m_want_type);
+        $day = $this->format_day($g_day, $g_d_m, $d_want_type);
+        $time = $this->format_time($date_time, $time_format, $t_want_type);
+
+        $date = $this->format_all($g_year, $month, $day, $time, $join_string, $format, "date");
+        $all = $this->format_all($g_year, $month, $day, $time, $join_string, $format, "all");
+        switch ($want) {
+            case "y":
+                return $g_year;
+                break;
+            case "m":
+                return $month;
+                break;
+            case "d":
+                return $day;
+                break;
+            case "time":
+                return $time;
+            case "date":
+                return $date;
+            case "all":
+                return $all;
+            default:
+                return $all;
+                break;
+        }
+    }
+
+    private function format_month($g_month, $m_want_type)
+    {
+        $view_month = "";
         foreach ($this->months as $month) {
             if ($month['M_NUM'] == $g_month) {
-                switch ($month_type) {
-                    case 'S':
+                switch ($m_want_type) {
+                    case 's':
                         $view_month = $month['M_SHORT_NAME'];
                         break;
-                    case 'SIN':
+                    case 'sin':
                         $view_month = $month['M_SINHALA_NAME'];
                         break;
-                    case 'F':
+                    case 'f':
                         $view_month = $month['M_FULL_NAME'];
                         break;
                     default:
@@ -178,61 +262,96 @@ class Sinhaladate
             }
         }
 
-        $time_view = "";
-        $time_indi = " පෙව";
+        return $view_month;
+    }
 
-        $time_24 = date('H:i:s', strtotime($date_time));
-        $time_12 = date('g:i', strtotime($date_time));
-        $time_12_indicator = date('a', strtotime($date_time));
+    private function format_day($g_date, $g_d_m, $d_want_type)
+    {
+        $view_day = "";
+        foreach ($this->days as $day) {
+            if ($day['D_NUM'] == $g_date) {
+                switch ($d_want_type) {
+                    case 's':
+                        $view_day = $day['D_SHORT_NAME'];
+                        break;
+                    case 'f':
+                        $view_day = $day['D_FULL_NAME'];
+                        break;
+                    case 'sin':
+                        $view_day = $day['D_SINHALA_NAME'];
+                        break;
+                    default:
+                        $view_day = $g_d_m;
+                        break;
+                }
+            }
+        }
+        return $view_day;
+    }
+
+    private function format_time($date_time_string, $time_format, $time_view_type)
+    {
+        $time_view = "";
+
+
+        $time_24 = date('H:i:s', strtotime($date_time_string));
+        $time_12 = date('g:i', strtotime($date_time_string));
+        $time_12_indicator = date('a', strtotime($date_time_string));
+
+        $time_indi = array(
+            "f" => "පෙරවරු ",
+            "s" => "පෙව ",
+            "sin" => "පූර්වභාග "
+        );
 
         if ($time_12_indicator == "pm") {
-            $time_indi = " පව";
+            $time_indi["f"] = "පස්වරු ";
+            $time_indi["s"] = "පව ";
+            $time_indi["sin"] = "අපරභාග ";
         }
 
-        switch ($time_type) {
+        switch ($time_format) {
             case '12':
-                $time_view = $time_12 . $time_indi;
+                $time_view = $time_indi[$time_view_type] . $time_12;
                 break;
             case '24':
                 $time_view = $time_24;
                 break;
             default:
-                $time_view = $time_12 . $time_indi;
+                $time_view = $time_12 . $time_12_indicator;
                 break;
         }
 
-        switch ($get) {
-            case 'D':
-                return $view_day;
-                break;
-            case 'M':
-                return $view_month;
-                break;
-            case 'TIME':
-                return $time_view;
-                break;
-            default:
-                $order_explode = explode("-", $order);
-                $order_set = array();
-                for ($x = 0; $x < count($order_explode); $x++) {
-                    switch ($order_explode[$x]) {
-                        case 'M':
-                            array_push($order_set, $view_month);
-                            break;
-                        case 'D':
-                            array_push($order_set, $view_day);
-                            break;
-                        case 'Y':
-                            array_push($order_set, $g_year);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                return join($date_join, $order_set);
-                break;
+        return $time_view;
+    }
+
+    private function format_all($g_year, $month, $day, $time, $join_string, $format, $want)
+    {
+
+        $order_explode = explode("-", $format);
+        $order_set = array();
+        for ($x = 0; $x < count($order_explode); $x++) {
+            switch ($order_explode[$x]) {
+                case 'm':
+                    array_push($order_set, $month);
+                    break;
+                case 'd':
+                    array_push($order_set, $day);
+                    break;
+                case 'y':
+                    array_push($order_set, $g_year);
+                    break;
+                default:
+                    break;
+            }
         }
 
-
+        if ($want == "all") {
+            $date_time = join($join_string, $order_set);
+            return $date_time . " " . $time;
+        } else {
+            $date_time = join($join_string, $order_set);
+            return $date_time;
+        }
     }
 }
