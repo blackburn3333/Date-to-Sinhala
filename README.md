@@ -49,9 +49,11 @@ $date_data = $date_to_sin->get_date($date_object);
     * example $ -> 2020$වෙසක්$සෙන
      
 * format -> return order of date
-    * Y-M-D, Y-D-M, Y-D , M-D...
-      
-      
+    * y-m-d, y-d-m, y-d , y-d...
+        
+* time_format -> return order of time
+    * 12,24    
+    
 ### Examples object
 ```sh
 $date_object = array(
