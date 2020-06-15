@@ -51,8 +51,11 @@ $date_data = $date_to_sin->get_date($date_object);
 * format -> return order of date
     * y-m-d, y-d-m, y-d , y-d...
         
-* time_format -> return order of time
+* time_format -> return format of time
     * 12,24    
+    
+* time_order -> return order of time
+    * h-m-s-a, h-m, h-m-s  
     
 ### Examples object
 ```sh
@@ -271,4 +274,40 @@ echo $date_data;
 ```
 ```
 Output -> 13:15:00
+```
+
+### 15
+
+```sh
+$date_object = array(
+    "date_time" => "2020-06-17 13:15:00",
+    "want" => "time",
+    "time_format" => "12",
+    "time_order" => "h-m-s-a"
+);
+
+$date_data = $date_to_sin->get_date($date_object);
+
+echo $date_data;
+```
+```
+Output -> පස්වරු 13:15:00
+```
+
+### 16
+
+```sh
+$date_object = array(
+    "date_time" => "2020-06-17 13:15:00",
+    "want" => "time",
+    "time_format" => "12",
+    "time_order" => "h-m"
+);
+
+$date_data = $date_to_sin->get_date($date_object);
+
+echo $date_data;
+```
+```
+Output -> 13:15
 ```

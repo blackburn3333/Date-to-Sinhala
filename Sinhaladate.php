@@ -149,7 +149,7 @@ class Sinhaladate
         $t_type = "f";
         $join_string = "-";
         $time_format = "12";
-
+        $time_order = "h-m-s-a";
 
         if (isset($date_time_data['want'])) {
             $w_type = $date_time_data['want'];
@@ -193,6 +193,13 @@ class Sinhaladate
             }
         }
 
+        if (isset($date_time_data['time_order'])) {
+            $time_order_g = $date_time_data['time_order'];
+            if ($time_order_g) {
+                $time_order = $time_order_g;
+            }
+        }
+
         if (isset($date_time_data['time_format'])) {
             $t_format = $date_time_data['time_format'];
             if ($t_format) {
@@ -201,10 +208,10 @@ class Sinhaladate
         }
 
         $date_time = $date_time_data['date_time'];
-        return $this->setup_date($date_time, $want_type, $d_type, $m_type, $t_type, $date_format, $time_format, $join_string);
+        return $this->setup_date($date_time, $want_type, $d_type, $m_type, $t_type, $date_format, $time_format, $join_string, $time_order);
     }
 
-    private function setup_date($date_time, $want, $d_want_type, $m_want_type, $t_want_type, $format, $time_format, $join_string)
+    private function setup_date($date_time, $want, $d_want_type, $m_want_type, $t_want_type, $format, $time_format, $join_string, $time_order)
     {
         $g_year = date("Y", strtotime($date_time));
         $g_month = date("m", strtotime($date_time));
@@ -214,7 +221,7 @@ class Sinhaladate
 
         $month = $this->format_month($g_month, $m_want_type);
         $day = $this->format_day($g_day, $g_d_m, $d_want_type);
-        $time = $this->format_time($date_time, $time_format, $t_want_type);
+        $time = $this->format_time($date_time, $time_format, $t_want_type, $time_order);
 
         $date = $this->format_all($g_year, $month, $day, $time, $join_string, $format, "date");
         $all = $this->format_all($g_year, $month, $day, $time, $join_string, $format, "all");
@@ -289,14 +296,16 @@ class Sinhaladate
         return $view_day;
     }
 
-    private function format_time($date_time_string, $time_format, $time_view_type)
+    private function format_time($date_time_string, $time_format, $time_view_type, $time_order)
     {
-        $time_view = "";
+        $time_view = array();
 
+        $time_string = explode("-", $time_order);
 
         $time_24 = date('H:i:s', strtotime($date_time_string));
-        $time_12 = date('g:i', strtotime($date_time_string));
+        $time_12 = date('g:i:s', strtotime($date_time_string));
         $time_12_indicator = date('a', strtotime($date_time_string));
+
 
         $time_indi = array(
             "f" => "පෙරවරු ",
@@ -310,19 +319,52 @@ class Sinhaladate
             $time_indi["sin"] = "අපරභාග ";
         }
 
-        switch ($time_format) {
-            case '12':
-                $time_view = $time_indi[$time_view_type] . $time_12;
-                break;
-            case '24':
-                $time_view = $time_24;
-                break;
-            default:
-                $time_view = $time_12 . $time_12_indicator;
-                break;
+
+        foreach ($time_string as $order) {
+            switch ($order) {
+                case 'h':
+                    switch ($time_format) {
+                        case '24':
+                            array_push($time_view, date('H', strtotime($date_time_string)));
+                            break;
+                        default:
+                            array_push($time_view, date('g', strtotime($date_time_string)));
+                            break;
+                    }
+                    break;
+                case 'm':
+                    array_push($time_view, date('i', strtotime($date_time_string)));
+                    break;
+                case 's':
+                    array_push($time_view, date('s', strtotime($date_time_string)));
+                    break;
+                default:
+                    break;
+            }
         }
 
-        return $time_view;
+        $time = join(":", $time_view);
+        foreach ($time_string as $order) {
+            switch ($order) {
+                case 'a':
+                    switch ($time_format) {
+                        case '12':
+                            $time = $time_indi[$time_view_type] . " " . $time;
+                            break;
+                        case '24':
+                            $time .= "";
+                            break;
+                        default:
+                            $time .= $time_indi[$time_view_type] . " " . $time;
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return $time;
     }
 
     private function format_all($g_year, $month, $day, $time, $join_string, $format, $want)
