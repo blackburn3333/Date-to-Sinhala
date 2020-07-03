@@ -1,5 +1,25 @@
-# Date-to-Sinhala
+# Date-to-Sinhala - Codeigniter Library
 Convert Date string to Sinhala Date V2.0
+
+###Usage
+* Copy Sinhaladate.php into libraries folder
+* import library and use as follow
+
+```
+$date_object = array(
+            "date_time" => "2020-06-17 13:15:00",
+            "want" => "time",
+            "want_m_type" => "num",
+            "want_d_type" => "s",
+            "want_t_type" => "f",
+            "date_join_type" => "-",
+            "format" => "y-m-d",
+            "time_format" => "24"
+        );
+        $this->load->library('sinhaladate');
+        $generate_date_time = $this->sinhaladate->get_date($date_object);
+        echo $generate_date_time;
+```
 
 ### function parameters
 
@@ -16,7 +36,8 @@ $date_data = $date_to_sin->get_date($date_object);
           "format" => "y-m-d",
           "time_format" => "12"
       );
-### Input object index details
+      
+### Input object details
 
 * date_time -> date time string
 
