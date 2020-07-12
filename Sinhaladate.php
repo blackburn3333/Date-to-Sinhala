@@ -119,7 +119,7 @@ class Sinhaladate
             "D_SINHALA_NAME" => "ශනිදා"
         ),
         array(
-            "D_NUM" => "7",
+            "D_NUM" => "0",
             "D_FULL_NAME" => "ඉරිදා",
             "D_SHORT_NAME" => "ඉරිදා",
             "D_SINHALA_NAME" => "රිවිදා"

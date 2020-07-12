@@ -21,7 +21,7 @@ $date_to_sin = new Sinhaladate();
 */
 
 $date_object = array(
-    "date_time" => "2020-06-17 13:15:00",
+    "date_time" => "2020-07-12 13:15:00",
     "want" => "all",
     "time_format" => "12",
     "time_order" => "a"
